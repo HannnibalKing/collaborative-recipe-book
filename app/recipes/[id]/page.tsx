@@ -4,8 +4,13 @@ import IngredientScaler from '@/components/IngredientScaler';
 import CookingMode from '@/components/CookingMode';
 import { Clock, Users, ChefHat } from 'lucide-react';
 
-export default function RecipeDetailPage({ params }: { params: { id: string } }) {
-  const recipe = sampleRecipes.find((r) => r.id === params.id);
+export default async function RecipeDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const recipe = sampleRecipes.find((r) => r.id === id);
 
   if (!recipe) {
     notFound();
